@@ -27,6 +27,7 @@ class Message:
     attachments: list[dict[str, Any]] = field(default_factory=list)
     mentions: list[User] = field(default_factory=list)
     pinned: bool = False
+    message_reference: dict[str, Any] | None = None
 
     _http: HTTPClient | None = field(default=None, repr=False)
     _channel: Channel | None = field(default=None, repr=False)
@@ -50,6 +51,7 @@ class Message:
             attachments=data.get("attachments", []),
             mentions=mentions,
             pinned=data.get("pinned", False),
+            message_reference=data.get("message_reference", None),
             _http=http,
         )
 
